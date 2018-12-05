@@ -1,9 +1,13 @@
 package gcsenxmk.q;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
@@ -12,12 +16,17 @@ public class Merc_Gallery extends AppCompatActivity {
 
     private static final String TAG = "GalleryActivity";
 
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.merc_gallery);
         getIncomingIntent();
+
+
         Log.d(TAG, "onCreate: started.");
+
     }
 
     private void getIncomingIntent() {
@@ -35,6 +44,9 @@ public class Merc_Gallery extends AppCompatActivity {
     private void setGallery(String imageUrl, String imageName) {
         Log.d(TAG, "setGallery:setting to image and name to widgets.");
 
+
+        Button toQueueDisplay;
+        toQueueDisplay = findViewById(R.id.toQueueDisplay);
         TextView name = findViewById(R.id.merc_queue_name);
         name.setText(imageName);
 
@@ -43,5 +55,14 @@ public class Merc_Gallery extends AppCompatActivity {
                 .asBitmap()
                 .load(imageUrl)
                 .into(image);
+
+        toQueueDisplay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Merc_Gallery.this,Merc_QueueDisplay.class);
+                startActivity(intent);
+
+            }
+        });
     }
 }

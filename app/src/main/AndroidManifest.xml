@@ -43,7 +43,9 @@
 
         <!-- Merchant Activities -->
         <activity android:name=".TEMP_Merc_GettingStarted" />
-        <activity android:name=".Merc_MainActivity">
+        <activity android:name=".Merc_MainActivity"
+            android:windowSoftInputMode="adjustNothing" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -56,8 +58,10 @@
             android:label="Help Page(Merchant)">
         </activity>
         <activity
-            android:name=".Merc_QueueInfo"
-            android:label="Queue Information" />
+            android:name=".Merc_QueueDisplay"
+            android:screenOrientation="landscape"
+
+             />
         <activity
             android:name=".Merc_QueueSettingsAndEdit"
             android:label="Queue Configuration" />

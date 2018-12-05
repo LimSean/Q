@@ -16,7 +16,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class MercFragment3 extends Fragment implements AdapterView.OnItemSelectedListener {
+public class MercSettings extends Fragment implements AdapterView.OnItemSelectedListener {
     private static final String TAG = "Tab3Fragment - Settings";
     private Spinner queueTypeSpinner, prioritySpinner;
     private EditText editEstTimeText;
@@ -27,7 +27,7 @@ public class MercFragment3 extends Fragment implements AdapterView.OnItemSelecte
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.merc_fragment3,container,false);
+        View view = inflater.inflate(R.layout.merc_settings,container,false);
         saveSettingButton= (Button) view.findViewById(R.id.saveSetting);
         deleteAllQueueButton = (Button) view.findViewById(R.id.deleteAllQueue);
         helpPageButton = (ImageButton) view.findViewById(R.id.helpPage);
