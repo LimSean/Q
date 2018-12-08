@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import org.w3c.dom.Text;
+
 import gcsenxmk.q.AppCompatPreferenceActivity;
 import gcsenxmk.q.R;
 import gcsenxmk.q.database.MerchantInformation_forSearch;
@@ -30,21 +33,21 @@ public class Cust_Search_Merchant extends AppCompatPreferenceActivity {
 
     EditText mSearchField;
     RecyclerView merchantlistResult;
-    DatabaseReference mDatabaseReference;
+    DatabaseReference mMerchantData;
     Button mSearchBtn;
     private static final String TAG = "Merchant_Search";
-    /*@Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cust_search_result);
+        setContentView(R.layout.cust_merchant_searchresult);
 
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Merchants");
+        mMerchantData = FirebaseDatabase.getInstance().getReference("Merchants");
 
 
-        mSearchField = findViewById(R.id.cme_editTxt_SearchBar);
-        mSearchBtn = findViewById(R.id.BtnSearchResult);
+        mSearchField = findViewById(R.id.testcme_editTxt_SearchBar);
+        mSearchBtn =  findViewById(R.id.testBtnSearchResult);
 
-        merchantlistResult = (RecyclerView) findViewById(R.id.recycler_view);
+        merchantlistResult= (RecyclerView) findViewById(R.id.testmerchant_search_list);
         merchantlistResult.setHasFixedSize(true);
         merchantlistResult.setLayoutManager(new LinearLayoutManager(this));
 
@@ -59,56 +62,27 @@ public class Cust_Search_Merchant extends AppCompatPreferenceActivity {
             }
         });
 
-    }*/
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
     }
 
+    private void firebaseUserSearch(String searchText) {
 
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.cust_merchant_searchresult, container, false);
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Merchants");
-
-        mSearchField = findViewById(R.id.cme_editTxt_SearchBar);
-        mSearchBtn = findViewById(R.id.BtnSearchResult);
-
-        merchantlistResult = (RecyclerView) findViewById(R.id.recycler_view);
-        merchantlistResult.setHasFixedSize(true);
-        merchantlistResult.setLayoutManager(new LinearLayoutManager(this));
-
-        mSearchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String searchText = mSearchField.getText().toString();
-                firebaseUserSearch(searchText);
-                startActivity(new Intent(Cust_Search_Merchant.this, UsersViewHolder.class));
-
-            }
-        });
-
-        return view;
-    }
-
-        private void firebaseUserSearch(String searchText) {
-        Log.d(TAG, "firebase Search start");
         Toast.makeText(Cust_Search_Merchant.this, "Started Search", Toast.LENGTH_LONG).show();
 
-        Query firebaseSearchQuery = mDatabaseReference.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
+        Query firebaseSearchQuery = mMerchantData.orderByChild("Merchants").startAt(searchText).endAt(searchText + "\uf8ff");
 
         FirebaseRecyclerAdapter<MerchantInformation_forSearch, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<MerchantInformation_forSearch, UsersViewHolder>(
 
                 MerchantInformation_forSearch.class,
-                R.layout.cust_merchant_searchresult,
+                R.layout.cust_list_item,
                 UsersViewHolder.class,
                 firebaseSearchQuery
 
-        )  {
+        ) {
             @Override
             protected void populateViewHolder(UsersViewHolder viewHolder, MerchantInformation_forSearch model, int position) {
 
-                Log.d(TAG, "getdata");
-                viewHolder.setDetails(getApplicationContext(), model.getQueuename(), model.getWaiting_time(), model.getQueueimage(), model.getNumberofCust());
+
+                viewHolder.setDetails(getApplicationContext(), model.getName(), Integer.toString(model.getAvewaiting()), model.getImageUrl(),Integer.toString(model.getNumPeople()));
 
             }
         };
@@ -116,6 +90,7 @@ public class Cust_Search_Merchant extends AppCompatPreferenceActivity {
         merchantlistResult.setAdapter(firebaseRecyclerAdapter);
 
     }
+
 
     // View Holder Class
 
@@ -130,20 +105,25 @@ public class Cust_Search_Merchant extends AppCompatPreferenceActivity {
 
         }
 
-        public void setDetails(Context ctx, String queueName, int Waiting_time, String merchantImage, int NumberofCust) {
+        public void setDetails(Context ctx, String userName, String avewaiting, String userImage, String numPeople){
 
-            TextView queue_name = (TextView) mView.findViewById(R.id.queueName);
-            TextView numberofCust = (TextView) mView.findViewById(R.id.queueNumPeople);
-            TextView waiting_time = (TextView) mView.findViewById(R.id.minutes);
-            ImageView merchant_image = (ImageView) mView.findViewById(R.id.queueImage);
+            TextView user_name = (TextView) mView.findViewById(R.id.queueName);
+            TextView user_status = (TextView) mView.findViewById(R.id.minutes);
+            ImageView user_image = (ImageView) mView.findViewById(R.id.queueImage);
+            TextView user_time= mView.findViewById(R.id.queueNumPeople);
 
 
-            queue_name.setText(queueName);
-            numberofCust.setText(NumberofCust);
-            waiting_time.setText(Waiting_time);
-            Glide.with(ctx).load(merchantImage).into(merchant_image);
+            user_name.setText(userName);
+            user_status.setText(avewaiting);
+
+            Glide.with(ctx).load(userImage).into(user_image);
 
 
         }
+
+
+
+
     }
+
 }
