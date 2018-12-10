@@ -34,60 +34,74 @@
         </activity>
 
         <activity android:name=".login.FirebaseLoginActivity"
-
+            android:screenOrientation="portrait"
             android:label="Q Login">
           <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <activity android:name=".customer.Init_Cust_Profile"
             android:parentActivityName=".login.SegregationActivity"
             android:label="Customer Account Registration"
+            android:screenOrientation="portrait"
             />
 
         <activity android:name=".login.SegregationActivity"
             android:parentActivityName=".login.FirebaseTestActivity"
-            android:label="Account Creation"/>
+            android:label="Account Creation"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".merchant.QueueActivity"
             android:parentActivityName=".login.SegregationActivity"
-            android:label="Configure your Queue!"/>
+            android:label="Configure your Queue!"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".login.FirebaseTestActivity"
             android:label="Registration"
+            android:screenOrientation="portrait"
             >
 
 
 
         </activity>
 
-        <activity android:name=".customer.RecyclerActivity"
+        <activity
+            android:name=".customer.RecyclerActivity"
             android:parentActivityName=".login.CustomerHomePageActivity"
-            android:label="Search Results"></activity>
+            android:label="Search Results"
+            android:screenOrientation="portrait"
+
+            ></activity>
 
         <activity android:name=".login.SegregationActivityAfterLogin"
             android:parentActivityName=".login.FirebaseLoginActivity"
-            android:label="Choose what you want to do">
+            android:label="Choose what you want to do"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity android:name=".login.CustomerHomePageActivity"
             android:parentActivityName=".login.SegregationActivityAfterLogin"
-            android:label="Customer Home Page"></activity>
+            android:label="Customer Home Page"
+            android:screenOrientation="portrait"></activity>
 
         <!-- Cust Activities -->
         <activity
             android:name=".customer.Cust_Gallery"
-            android:label="Stall Description" />
+            android:label="Stall Description"
+            android:screenOrientation="portrait"/>
         <activity android:name=".customer.Cust_MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
 
         </activity>
         <activity
             android:name=".customer.Cust_Search_Merchant"
 
             android:label="Search Page"
+            android:screenOrientation="portrait"
             >
         </activity>
 
@@ -96,36 +110,43 @@
         <!-- Merchant Activities -->
 
 
-        <activity android:name=".merchant.Merc_MainActivity">
+        <activity android:name=".merchant.Merc_MainActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".merchant.Merc_Gallery" />
+        <activity android:name=".merchant.Merc_Gallery"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".merchant.Merc_HelpPage_ConfigQueue"
             android:label="Configuring the Queue"
+            android:screenOrientation="portrait"
             />
         <activity
             android:name=".merchant.Merc_HelpPage_OperateQueue"
-            android:label="Operating the Queue"/>
+            android:label="Operating the Queue"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".merchant.Merc_HelpPage_EmailSetting"
-            android:label="Changing Account Emails and Password"/>
+            android:label="Changing Account Emails and Password"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".merchant.Merc_QueueDisplay"
             android:screenOrientation="landscape"
+
             />
 
         <activity android:name=".merchant.MercQueueConfigured"
             android:label="Queue Configured!"
+            android:screenOrientation="portrait"
             />
 
         <!-- Redundant activities -->
         <!-- redundant upload activity -->
-        <activity android:name=".database.Upload_Activity" />
+        <activity android:name=".database.Upload_Activity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".login.MerchantViewQueuesActivityAfterLogin"
-            android:parentActivityName=".login.SegregationActivityAfterLogin">
-
-
+            android:parentActivityName=".login.SegregationActivityAfterLogin"
+            android:screenOrientation="portrait">
         </activity>
 
 
